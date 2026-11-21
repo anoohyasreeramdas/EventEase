@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bookings - EventEase</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            background-color: #F5F0E6;
+            color: #30291F;
+        }
+
+        .bookings-page {
+            max-width: 1050px;
+            margin: 0 auto;
+            padding: 35px 25px 70px;
+        }
+
+        .bookings-heading {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .bookings-logo {
+            width: 76px;
+            height: 76px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto 18px;
+        }
+
+        .bookings-heading h1 {
+            color: #967A4D;
+            font-size: 2.2rem;
+            margin: 0 0 10px;
+            letter-spacing: 1px;
+        }
+
+        .bookings-heading p {
+            color: #665C4E;
+            font-size: 15px;
+            margin: 0;
+        }
+
+        .back-home {
+            display: inline-block;
+            margin-top: 18px;
+            color: #806A48;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .back-home:hover {
+            color: #A88B58;
+        }
+
+        .bookings-intro {
+            margin-bottom: 25px;
+        }
+
+        .bookings-intro h2 {
+            font-size: 1.4rem;
+            color: #30291F;
+            margin: 0 0 6px;
+        }
+
+        .bookings-intro p {
+            color: #806F5B;
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .booking-card {
+            background: #FBF8F1;
+            border: 1px solid #E2D5BD;
+            border-radius: 13px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 14px rgba(76, 58, 31, 0.06);
+        }
+
+        .booking-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            padding-bottom: 17px;
+            border-bottom: 1px solid #E2D5BD;
+            margin-bottom: 5px;
+        }
+
+        .booking-card-header h3 {
+            color: #967A4D;
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .booking-reference {
+            color: #806F5B;
+            font-size: 12px;
+        }
+
+        .booking-item {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            padding: 20px 0;
+            border-bottom: 1px solid #EAE1D2;
+        }
+
+        .booking-item:last-child {
+            border-bottom: none;
+        }
+
+        .booking-poster {
+            width: 105px;
+            height: 135px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #E2D5BD;
+            flex-shrink: 0;
+            background: #F0E6D3;
+        }
+
+        .item-details {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .item-details h4 {
+            color: #30291F;
+            font-size: 1.12rem;
+            margin: 0 0 9px;
+        }
+
+        .item-details p {
+            color: #665C4E;
+            font-size: 14px;
+            margin: 6px 0;
+            line-height: 1.5;
+        }
+
+        .item-details .show-info {
+            color: #967A4D;
+            font-weight: 600;
+        }
+
+        .item-price {
+            color: #806A48 !important;
+            font-weight: 700;
+        }
+
+        .rebook-btn {
+            background: #CBB58C;
+            color: #30291F;
+            border: 1px solid #CBB58C;
+            border-radius: 6px;
+            padding: 10px 19px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s;
+            white-space: nowrap;
+        }
+
+        .rebook-btn:hover {
+            background: #B69A6B;
+            border-color: #B69A6B;
+        }
+
+        .booking-total {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 12px;
+            padding-top: 16px;
+            border-top: 1px solid #E2D5BD;
+            color: #665C4E;
+            font-size: 14px;
+        }
+
+        .booking-total strong {
+            color: #967A4D;
+            font-size: 17px;
+        }
+
+        .empty-bookings {
+            text-align: center;
+            background: #FBF8F1;
+            border: 1px solid #E2D5BD;
+            border-radius: 13px;
+            padding: 55px 20px;
+            box-shadow: 0 4px 14px rgba(76, 58, 31, 0.05);
+        }
+
+        .empty-bookings h2 {
+            color: #967A4D;
+            margin: 0 0 12px;
+        }
+
+        .empty-bookings p {
+            color: #806F5B;
+            margin: 0 0 22px;
+        }
+
+        .browse-btn {
+            display: inline-block;
+            background: #CBB58C;
+            color: #30291F;
+            text-decoration: none;
+            padding: 11px 22px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .browse-btn:hover {
+            background: #B69A6B;
+        }
+
+        .loading-message,
+        .error-message {
+            text-align: center;
+            color: #806F5B;
+            padding: 35px 15px;
+        }
+
+        @media (max-width: 650px) {
+            .bookings-page {
+                padding: 25px 15px 50px;
+            }
+
+            .bookings-heading h1 {
+                font-size: 1.8rem;
+            }
+
+            .booking-card {
+                padding: 17px;
+            }
+
+            .booking-item {
+                gap: 14px;
+                flex-wrap: wrap;
+            }
+
+            .booking-poster {
+                width: 85px;
+                height: 115px;
+            }
+
+            .item-details {
+                flex-basis: calc(100% - 105px);
+            }
+
+            .rebook-btn {
+                margin-left: 99px;
+            }
+
+            .booking-total {
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="bookings-page">
+
+        <section class="bookings-heading">
+            <img src="eventease-logo.png" alt="EventEase Logo" class="bookings-logo">
+
+            <h1>My Bookings</h1>
+            <p>Your event memories, all in one place.</p>
+
+            <a href="index.html" class="back-home">← Back to Home</a>
+        </section>
+
+        <section class="bookings-intro">
+            <h2>Booking History</h2>
+            <p>View your previous bookings and book your favourite events again.</p>
+        </section>
+
+        <section id="bookings-container">
+            <p class="loading-message">Loading your booking history...</p>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const bookingsContainer = document.getElementById('bookings-container');
+
+            try {
+                const response = await fetch('http://127.0.0.1:3000/my-bookings', {
+                    credentials: 'include'
+                });
+
+                if (response.status === 401) {
+                    window.location.href = 'login.html';
+                    return;
+                }
+
+                if (!response.ok) {
+                    throw new Error('Could not retrieve booking history.');
+                }
+
+                const bookings = await response.json();
+
+                bookingsContainer.innerHTML = '';
+
+                if (bookings.length === 0) {
+                    bookingsContainer.innerHTML = `
+                        <div class="empty-bookings">
+                            <h2>No Bookings Yet</h2>
+                            <p>Your booked events will appear here once you make a booking.</p>
+                            <a href="index.html" class="browse-btn">Explore Events</a>
+                        </div>
+                    `;
+                    return;
+                }
+
+                bookings.forEach((booking, index) => {
+                    let bookingDetails;
+
+                    if (typeof booking.booking_details === 'string') {
+                        bookingDetails = JSON.parse(booking.booking_details);
+                    } else {
+                        bookingDetails = booking.booking_details;
+                    }
+
+                    const bookingCard = document.createElement('div');
+                    bookingCard.className = 'booking-card';
+
+                    const bookingHeader = document.createElement('div');
+                    bookingHeader.className = 'booking-card-header';
+
+                    const heading = document.createElement('h3');
+                    heading.textContent = 'Booking Date: ' +
+                        new Date(booking.booking_date).toLocaleString();
+
+                    const reference = document.createElement('span');
+                    reference.className = 'booking-reference';
+                    reference.textContent = 'Booking #' + booking.id;
+
+                    bookingHeader.appendChild(heading);
+                    bookingHeader.appendChild(reference);
+                    bookingCard.appendChild(bookingHeader);
+
+                    bookingDetails.forEach(item => {
+                        const itemDiv = document.createElement('div');
+                        itemDiv.className = 'booking-item';
+
+                        const poster = document.createElement('img');
+                        poster.className = 'booking-poster';
+                        poster.src = item.event_poster || 'eventease-logo.png';
+                        poster.alt = item.event_title || 'Booked event';
+
+                        const itemDetails = document.createElement('div');
+                        itemDetails.className = 'item-details';
+
+                        const title = document.createElement('h4');
+                        title.textContent = item.event_title || 'Event';
+
+                        const place = document.createElement('p');
+                        place.textContent = 'Venue: ' + (item.event_place || 'Not specified');
+
+                        itemDetails.appendChild(title);
+                        itemDetails.appendChild(place);
+
+                        if (item.event_date && item.event_time) {
+                            const dateValue = String(item.event_date).slice(0, 10);
+                            const dateParts = dateValue.split('-');
+                            const showDate = dateParts.length === 3
+                                ? new Date(
+                                    Number(dateParts[0]),
+                                    Number(dateParts[1]) - 1,
+                                    Number(dateParts[2])
+                                ).toLocaleDateString('en-GB', {
+                                    day: '2-digit',
+                                    month: 'short',
+                                    year: 'numeric'
+                                })
+                                : dateValue;
+
+                            const showInfo = document.createElement('p');
+                            showInfo.className = 'show-info';
+                            showInfo.textContent = 'Date: ' + showDate +
+                                ' | Time: ' + item.event_time;
+
+                            itemDetails.appendChild(showInfo);
+
+                        } else if (item.event_time) {
+                            const showInfo = document.createElement('p');
+                            showInfo.className = 'show-info';
+                            showInfo.textContent = 'Time: ' + item.event_time;
+
+                            itemDetails.appendChild(showInfo);
+                        }
+
+                        const price = document.createElement('p');
+                        price.className = 'item-price';
+                        price.textContent = 'Price: ₹' + (item.event_price ?? 0);
+
+                        itemDetails.appendChild(price);
+
+                        const rebookBtn = document.createElement('button');
+                        rebookBtn.className = 'rebook-btn';
+                        rebookBtn.textContent = 'Book Again';
+
+                        rebookBtn.addEventListener('click', () => {
+                            rebookItem(item);
+                        });
+
+                        itemDiv.appendChild(poster);
+                        itemDiv.appendChild(itemDetails);
+                        itemDiv.appendChild(rebookBtn);
+
+                        bookingCard.appendChild(itemDiv);
+                    });
+
+                    const total = document.createElement('div');
+                    total.className = 'booking-total';
+
+                    const totalLabel = document.createElement('span');
+                    totalLabel.textContent = 'Booking Total';
+
+                    const totalAmount = document.createElement('strong');
+                    totalAmount.textContent = '₹' + booking.total_price;
+
+                    total.appendChild(totalLabel);
+                    total.appendChild(totalAmount);
+
+                    bookingCard.appendChild(total);
+                    bookingsContainer.appendChild(bookingCard);
+                });
+
+            } catch (error) {
+                console.error('Failed to load bookings:', error);
+
+                bookingsContainer.innerHTML = `
+                    <p class="error-message">
+                        Could not load your booking history. Please try again.
+                    </p>
+                `;
+            }
+        });
+
+
+        // Add a previously booked event back to the cart
+        async function rebookItem(item) {
+            const itemToRebook = {
+                title: item.event_title,
+                poster: item.event_poster,
+                place: item.event_place,
+                time: item.event_time,
+                price: parseFloat(item.event_price) || 0,
+                date: item.event_date
+                    ? String(item.event_date).slice(0, 10)
+                    : null
+            };
+
+            try {
+                const response = await fetch('http://127.0.0.1:3000/cart', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify(itemToRebook)
+                });
+
+                if (!response.ok) {
+                    const errorResult = await response.json();
+                    throw new Error(
+                        errorResult.message || 'Could not add item to cart.'
+                    );
+                }
+
+                alert(`"${item.event_title}" has been added back to your cart!`);
+                window.location.href = 'cart.html';
+
+            } catch (error) {
+                console.error('Rebook failed:', error);
+                alert('Error: ' + error.message);
+            }
+        }
+    </script>
+
+</body>
+</html>

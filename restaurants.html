@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurants - EventEase</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="restaurantsData.js" defer></script>
+    <script src="restaurantsBooking.js" defer></script>
+
+    <style>
+        /* Restaurant cards layout */
+        .restaurant-grid {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 20px;
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Responsive layout */
+        @media (max-width: 1200px) {
+            .restaurant-grid {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 950px) {
+            .restaurant-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 650px) {
+            .restaurant-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 420px) {
+            .restaurant-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .modal-time-slots {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .time-slot-btn {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+
+        .time-slot-btn:hover {
+            background-color: #e0e0e0;
+            border-color: #999;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 1.8em;
+            cursor: pointer;
+            color: #888;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="restaurant-page">
+
+    <header class="page-header restaurants-header category-header">
+        <a href="index.html" class="back-home">← Back to Home</a>
+        <img src="eventease-logo.png" alt="EventEase Logo" class="logo">
+        <h1>Book a Table</h1>
+    </header>
+
+    <main>
+        <div class="city-selector">
+            <label for="city" class="city-label">Select City:</label>
+            <select id="city">
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Bangalore">Bangalore</option>
+            </select>
+        </div>
+
+        <div class="restaurant-grid" id="restaurants-container">
+            <!-- Restaurants will be dynamically loaded -->
+        </div>
+    </main>
+
+    <!-- Booking modal -->
+    <div id="booking-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <span id="modal-close" class="modal-close">&times;</span>
+            <h2>Select a Time Slot</h2>
+            <h3 id="modal-restaurant-name"></h3>
+            <div id="modal-time-slots" class="modal-time-slots">
+                <!-- Time slot buttons will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

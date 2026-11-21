@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ - EventEase</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #F5F0E6;
+      margin: 0;
+      padding: 0;
+      color: #30291F;
+    }
+
+    .faq-logo {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      display: block;
+      margin: 40px auto 12px;
+    }
+
+    .back-home {
+      position: absolute;
+      left: 20px;
+      top: 20px;
+      text-decoration: none;
+      color: #806A48;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+
+    .back-home:hover {
+      color: #A88B58;
+    }
+
+    header {
+      background: #F5F0E6;
+      color: #967A4D;
+      text-align: center;
+      padding: 20px;
+      font-size: 2rem;
+      animation: fadeInDown 1s ease-in-out;
+      border-bottom: 1px solid #E2D5BD;
+    }
+
+    .faq-container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+
+    .faq-item {
+      background: #FBF8F1;
+      margin: 10px 0;
+      border-radius: 8px;
+      box-shadow: 0 3px 6px rgba(80,60,30,0.10);
+      border: 1px solid #E2D5BD;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-item:hover {
+      transform: scale(1.02);
+    }
+
+    .faq-question {
+      padding: 15px;
+      cursor: pointer;
+      background: #CBB58C;
+      color: #30291F;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-answer {
+      padding: 15px;
+      display: none;
+      background: #FBF8F1;
+      color: #30291F;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a href="index.html" class="back-home">← Back to Home</a>
+
+  <img src="eventease-logo.png" alt="EventEase Logo" class="faq-logo">
+
+  <header>❓ Frequently Asked Questions</header>
+
+  <div class="faq-container">
+    <div class="faq-item">
+      <div class="faq-question">What is EventEase? <span>+</span></div>
+      <div class="faq-answer">EventEase is a platform where you can book tickets for movies, concerts, stand-up shows, and reserve restaurants easily.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">How can I cancel my booking? <span>+</span></div>
+      <div class="faq-answer">Currently, cancellations are not supported online. Please contact our support team.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">What payment methods are supported? <span>+</span></div>
+      <div class="faq-answer">EventEase currently provides a demo payment experience. No actual payment is processed.</div>
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.faq-question').forEach(item => {
+      item.addEventListener('click', () => {
+        const answer = item.nextElementSibling;
+        const isVisible = answer.style.display === 'block';
+
+        document.querySelectorAll('.faq-answer').forEach(ans => ans.style.display = 'none');
+        document.querySelectorAll('.faq-question span').forEach(span => span.textContent = '+');
+
+        if (!isVisible) {
+          answer.style.display = 'block';
+          item.querySelector('span').textContent = '-';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

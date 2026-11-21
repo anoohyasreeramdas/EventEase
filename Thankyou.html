@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thank You - EventEase</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background: #F5F0E6;
+      font-family: Arial, sans-serif;
+      color: #30291F;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: #967A4D;
+      animation: bounce 1s infinite alternate;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin: 10px 0;
+      color: #30291F;
+    }
+
+    .home-btn {
+      background: #CBB58C;
+      color: #30291F;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(48, 41, 31, 0.12);
+      transition: all 0.3s ease;
+    }
+
+    .home-btn:hover {
+      background: #B69A6B;
+      transform: translateY(-3px);
+    }
+
+    @keyframes bounce {
+      from { transform: translateY(0); }
+      to { transform: translateY(-12px); }
+    }
+    .thankyou-logo {
+  width: 75px;
+  height: 75px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+  </style>
+</head>
+
+<body>
+  <img src="eventease-logo.png" alt="EventEase Logo" class="thankyou-logo">
+  <h1>🎉 Thank You!</h1>
+  <p>Your payment was successful and your booking is confirmed.</p>
+  <button class="home-btn" onclick="window.location.href='index.html'">Back to Home</button>
+</body>
+</html>
