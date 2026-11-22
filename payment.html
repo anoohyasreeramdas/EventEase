@@ -1,345 +1,371 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Payment - EventEase</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - EventEase</title>
+    <link rel="stylesheet" href="style.css">
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #F5F0E6;
-      margin: 0;
-      padding: 0;
-      color: #30291F;
-      animation: fadeInBody 1s ease-in-out;
-    }
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #F5F0E6;
+            margin: 0;
+            padding: 0;
+            color: #30291F;
+            animation: fadeInBody 1s ease-in-out;
+        }
 
-    @keyframes fadeInBody {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
+        @keyframes fadeInBody {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
 
-    header {
-      background: #F5F0E6;
-      color: #967A4D;
-      padding: 15px;
-      text-align: center;
-      font-size: 1.5rem;
-      font-weight: bold;
-      border-bottom: 1px solid #E2D5BD;
-      animation: slideDown 0.8s ease-in-out;
-    }
+        header {
+            background: #F5F0E6;
+            color: #967A4D;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border-bottom: 1px solid #E2D5BD;
+            animation: slideDown 0.8s ease-in-out;
+        }
 
-    @keyframes slideDown {
-      from { transform: translateY(-50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
+        @keyframes slideDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
 
-    .container {
-      max-width: 900px;
-      margin: 30px auto;
-      background: #FBF8F1;
-      padding: 20px;
-      border: 1px solid #E2D5BD;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(48, 41, 31, 0.08);
-      animation: fadeUp 1s ease-in-out;
-    }
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            background: #FBF8F1;
+            padding: 20px;
+            border: 1px solid #E2D5BD;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(48, 41, 31, 0.08);
+            animation: fadeUp 1s ease-in-out;
+        }
 
-    @keyframes fadeUp {
-      from { transform: translateY(50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
+        @keyframes fadeUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
 
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: #967A4D;
-    }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #967A4D;
+        }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 20px;
-    }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
 
-    table th, table td {
-      border: 1px solid #E2D5BD;
-      padding: 10px;
-      text-align: center;
-      animation: fadeInRow 0.6s ease forwards;
-    }
+        table th, table td {
+            border: 1px solid #E2D5BD;
+            padding: 10px;
+            text-align: center;
+            animation: fadeInRow 0.6s ease forwards;
+        }
 
-    table th {
-      background-color: #F0E6D3;
-      color: #806A48;
-    }
+        table th {
+            background-color: #F0E6D3;
+            color: #806A48;
+        }
 
-    @keyframes fadeInRow {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+        @keyframes fadeInRow {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-    .remove-btn {
-      background-color: #967A4D;
-      color: #FBF8F1;
-      border: none;
-      padding: 5px 10px;
-      cursor: pointer;
-      border-radius: 4px;
-      transition: transform 0.2s, background 0.3s;
-    }
+        .remove-btn {
+            background-color: #967A4D;
+            color: #FBF8F1;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: transform 0.2s, background 0.3s;
+        }
 
-    .remove-btn:hover {
-      background-color: #806A48;
-      transform: scale(1.1);
-    }
+        .remove-btn:hover {
+            background-color: #806A48;
+            transform: scale(1.1);
+        }
 
-    .total-price {
-      text-align: right;
-      font-size: 1.2rem;
-      margin-bottom: 20px;
-      color: #967A4D;
-      font-weight: bold;
-    }
+        .total-price {
+            text-align: right;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #967A4D;
+            font-weight: bold;
+        }
 
-    .payment-form label {
-      display: block;
-      margin: 10px 0 5px;
-      font-weight: bold;
-      color: #30291F;
-    }
+        .payment-form label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+            color: #30291F;
+        }
 
-    .payment-form input {
-      width: 100%;
-      padding: 8px;
-      margin-bottom: 15px;
-      border: 1px solid #E2D5BD;
-      border-radius: 5px;
-      background: #FFFFFF;
-      color: #30291F;
-      box-sizing: border-box;
-    }
+        .payment-form input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #E2D5BD;
+            border-radius: 5px;
+            background: #FFFFFF;
+            color: #30291F;
+            box-sizing: border-box;
+        }
 
-    .payment-form input:focus {
-      outline: none;
-      border-color: #CBB58C;
-      box-shadow: 0 0 4px rgba(203, 181, 140, 0.4);
-    }
+        .payment-form input:focus {
+            outline: none;
+            border-color: #CBB58C;
+            box-shadow: 0 0 4px rgba(203, 181, 140, 0.4);
+        }
 
-    .pay-btn {
-      width: 100%;
-      padding: 12px;
-      background-color: #CBB58C;
-      border: none;
-      color: #30291F;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      border-radius: 5px;
-      transition: background 0.3s, transform 0.2s;
-    }
+        .pay-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #CBB58C;
+            border: none;
+            color: #30291F;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s, transform 0.2s;
+        }
 
-    .pay-btn:hover {
-      background-color: #B69A6B;
-      transform: scale(1.05);
-    }
+        .pay-btn:hover {
+            background-color: #B69A6B;
+            transform: scale(1.05);
+        }
 
-    .payment-logo {
-      width: 65px;
-      height: 65px;
-      object-fit: contain;
-      display: block;
-      margin: 20px auto 12px;
-    }
-  </style>
+        .payment-logo {
+            width: 65px;
+            height: 65px;
+            object-fit: contain;
+            display: block;
+            margin: 20px auto 12px;
+        }
+    </style>
 </head>
 
 <body>
-  <img src="eventease-logo.png" alt="EventEase Logo" class="payment-logo">
-  <header>Payment Page</header>
+    <img src="eventease-logo.png" alt="EventEase Logo" class="payment-logo">
+    <header>Payment Page</header>
 
-  <div class="container">
-    <h2>Your Booking Details</h2>
+    <div class="container">
+        <h2>Your Booking Details</h2>
 
-    <table id="booking-table">
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Time</th>
-          <th>Price</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+        <table id="booking-table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Time</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
 
-    <div class="total-price">Total: ₹<span id="total-price">0</span></div>
+        <div class="total-price">
+            Total: ₹<span id="total-price">0</span>
+        </div>
 
-    <div class="payment-form">
-      <label for="cardName">Cardholder Name</label>
-      <input type="text" id="cardName" placeholder="Enter your name" autocomplete="cc-name">
+        <div class="payment-form">
+            <label for="cardName">Cardholder Name</label>
+            <input type="text" id="cardName"
+                placeholder="Enter your name" autocomplete="cc-name">
 
-      <label for="cardNumber">Card Number</label>
-      <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" autocomplete="off">
+            <label for="cardNumber">Card Number</label>
+            <input
+                type="text"
+                id="cardNumber"
+                placeholder="1234 5678 9012 3456"
+                maxlength="19"
+                inputmode="numeric"
+                autocomplete="off"
+            >
 
-      <label for="expiry">Expiry Date (MM/YY)</label>
-      <input type="text" id="expiry" placeholder="MM/YY" autocomplete="off">
+            <label for="expiry">Expiry Date (MM/YY)</label>
+            <input type="text" id="expiry"
+                placeholder="MM/YY" autocomplete="off">
 
-      <label for="cvv">CVV</label>
-      <input type="password" id="cvv" placeholder="123" autocomplete="off">
+            <label for="cvv">CVV</label>
+            <input type="password" id="cvv"
+                placeholder="123" autocomplete="off">
 
-      <button class="pay-btn" id="pay-now" type="button">Pay Now</button>
+            <button class="pay-btn" id="pay-now" type="button">
+                Pay Now
+            </button>
+        </div>
     </div>
-  </div>
 
-  <script>
-    const API_URL = 'https://eventease-backend-0qmn.onrender.com';
+    <script>
+        const API_URL = 'https://eventease-backend-0qmn.onrender.com';
 
-    const tableBody = document.querySelector("#booking-table tbody");
-    const totalPriceEl = document.getElementById("total-price");
-    const payButton = document.getElementById("pay-now");
+        const tableBody = document.querySelector("#booking-table tbody");
+        const totalPriceEl = document.getElementById("total-price");
+        const payButton = document.getElementById("pay-now");
 
-    let currentCartItems = [];
+        let currentCartItems = [];
 
-    document.addEventListener("DOMContentLoaded", async () => {
-      try {
-        const sessionResponse = await fetch(`${API_URL}/check-session`, {
-          credentials: 'include'
+        document.addEventListener("DOMContentLoaded", async () => {
+            try {
+                const sessionResponse = await fetch(`${API_URL}/check-session`, {
+                    credentials: 'include'
+                });
+
+                if (!sessionResponse.ok) {
+                    throw new Error('Not logged in');
+                }
+
+                const sessionData = await sessionResponse.json();
+
+                if (!sessionData.isLoggedIn) {
+                    throw new Error('Not logged in');
+                }
+
+                const cartResponse = await fetch(`${API_URL}/cart`, {
+                    credentials: 'include'
+                });
+
+                if (!cartResponse.ok) {
+                    throw new Error('Could not fetch cart items.');
+                }
+
+                currentCartItems = await cartResponse.json();
+                renderBookings(currentCartItems);
+
+            } catch (error) {
+                console.error('Payment page error:', error.message);
+                window.location.href = 'login.html';
+            }
         });
 
-        if (!sessionResponse.ok) {
-          throw new Error('Not logged in');
+        function renderBookings(cartItems) {
+            tableBody.innerHTML = "";
+            let total = 0;
+
+            if (cartItems.length === 0) {
+                window.location.href = 'cart.html';
+                return;
+            }
+
+            cartItems.forEach(item => {
+                const row = document.createElement("tr");
+                total += Number(item.event_price) || 0;
+
+                const titleCell = document.createElement("td");
+                titleCell.textContent = item.event_title;
+
+                const timeCell = document.createElement("td");
+                timeCell.textContent = item.event_time;
+
+                const priceCell = document.createElement("td");
+                priceCell.textContent = `₹${item.event_price}`;
+
+                const actionCell = document.createElement("td");
+                const removeButton = document.createElement("button");
+
+                removeButton.className = "remove-btn";
+                removeButton.textContent = "Remove";
+                removeButton.addEventListener("click", () => removeItem(item.id));
+
+                actionCell.appendChild(removeButton);
+                row.append(titleCell, timeCell, priceCell, actionCell);
+                tableBody.appendChild(row);
+            });
+
+            totalPriceEl.textContent = total;
         }
 
-        const sessionData = await sessionResponse.json();
+        async function removeItem(itemId) {
+            if (!confirm('Are you sure you want to remove this item from your payment?')) {
+                return;
+            }
 
-        if (!sessionData.isLoggedIn) {
-          throw new Error('Not logged in');
+            try {
+                const response = await fetch(`${API_URL}/cart/${itemId}`, {
+                    method: 'DELETE',
+                    credentials: 'include'
+                });
+
+                if (!response.ok) {
+                    throw new Error('Could not remove the item.');
+                }
+
+                currentCartItems = currentCartItems.filter(
+                    item => item.id !== itemId
+                );
+
+                renderBookings(currentCartItems);
+
+            } catch (error) {
+                console.error('Remove item error:', error);
+                alert('Unable to remove this item. Please try again.');
+            }
         }
 
-        const cartResponse = await fetch(`${API_URL}/cart`, {
-          credentials: 'include'
+        payButton.addEventListener("click", async () => {
+            if (currentCartItems.length === 0) {
+                alert("There are no items to pay for. Returning to your cart.");
+                window.location.href = 'cart.html';
+                return;
+            }
+
+            const cardName = document.getElementById("cardName").value.trim();
+            const cardNumber = document.getElementById("cardNumber").value.trim();
+            const expiry = document.getElementById("expiry").value.trim();
+            const cvv = document.getElementById("cvv").value.trim();
+
+            if (!cardName || !cardNumber || !expiry || !cvv) {
+                alert("Please fill in all payment details before proceeding.");
+                return;
+            }
+
+            // Validate exactly 16 digits, allowing spaces.
+            const cleanCardNumber = cardNumber.replace(/\s/g, '');
+
+            if (!/^\d{16}$/.test(cleanCardNumber)) {
+                alert("Please enter a valid 16-digit card number.");
+                return;
+            }
+
+            try {
+                payButton.disabled = true;
+
+                const response = await fetch(`${API_URL}/bookings`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include'
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    alert("Booking confirmed! Thank you for booking with EventEase.");
+                    window.location.href = "thankyou.html";
+                } else {
+                    alert(`Booking Failed: ${result.message || 'Please try again.'}`);
+                    payButton.disabled = false;
+                }
+
+            } catch (error) {
+                console.error("Booking error:", error);
+                alert('A network error occurred. Please try again.');
+                payButton.disabled = false;
+            }
         });
-
-        if (!cartResponse.ok) {
-          throw new Error('Could not fetch cart items.');
-        }
-
-        currentCartItems = await cartResponse.json();
-        renderBookings(currentCartItems);
-
-      } catch (error) {
-        console.error('Payment page error:', error.message);
-        window.location.href = 'login.html';
-      }
-    });
-
-    function renderBookings(cartItems) {
-      tableBody.innerHTML = "";
-      let total = 0;
-
-      if (cartItems.length === 0) {
-        window.location.href = 'cart.html';
-        return;
-      }
-
-      cartItems.forEach(item => {
-        const row = document.createElement("tr");
-        total += Number(item.event_price) || 0;
-
-        const titleCell = document.createElement("td");
-        titleCell.textContent = item.event_title;
-
-        const timeCell = document.createElement("td");
-        timeCell.textContent = item.event_time;
-
-        const priceCell = document.createElement("td");
-        priceCell.textContent = `₹${item.event_price}`;
-
-        const actionCell = document.createElement("td");
-        const removeButton = document.createElement("button");
-
-        removeButton.className = "remove-btn";
-        removeButton.textContent = "Remove";
-        removeButton.addEventListener("click", () => removeItem(item.id));
-
-        actionCell.appendChild(removeButton);
-        row.append(titleCell, timeCell, priceCell, actionCell);
-        tableBody.appendChild(row);
-      });
-
-      totalPriceEl.textContent = total;
-    }
-
-    async function removeItem(itemId) {
-      if (!confirm('Are you sure you want to remove this item from your payment?')) {
-        return;
-      }
-
-      try {
-        const response = await fetch(`${API_URL}/cart/${itemId}`, {
-          method: 'DELETE',
-          credentials: 'include'
-        });
-
-        if (!response.ok) {
-          throw new Error('Could not remove the item.');
-        }
-
-        currentCartItems = currentCartItems.filter(item => item.id !== itemId);
-        renderBookings(currentCartItems);
-
-      } catch (error) {
-        console.error('Remove item error:', error);
-        alert('Unable to remove this item. Please try again.');
-      }
-    }
-
-    payButton.addEventListener("click", async () => {
-      if (currentCartItems.length === 0) {
-        alert("There are no items to pay for. Returning to your cart.");
-        window.location.href = 'cart.html';
-        return;
-      }
-
-      const cardName = document.getElementById("cardName").value.trim();
-      const cardNumber = document.getElementById("cardNumber").value.trim();
-      const expiry = document.getElementById("expiry").value.trim();
-      const cvv = document.getElementById("cvv").value.trim();
-
-      if (!cardName || !cardNumber || !expiry || !cvv) {
-        alert("Please fill in all payment details before proceeding.");
-        return;
-      }
-
-      try {
-        payButton.disabled = true;
-
-        const response = await fetch(`${API_URL}/bookings`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'include'
-        });
-
-        const result = await response.json();
-
-        if (response.ok) {
-          alert("Booking confirmed! Thank you for booking with EventEase.");
-          window.location.href = "thankyou.html";
-        } else {
-          alert(`Booking Failed: ${result.message || 'Please try again.'}`);
-          payButton.disabled = false;
-        }
-
-      } catch (error) {
-        console.error("Booking error:", error);
-        alert('A network error occurred. Please try again.');
-        payButton.disabled = false;
-      }
-    });
-  </script>
+    </script>
 </body>
 </html>
