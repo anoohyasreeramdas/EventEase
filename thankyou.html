@@ -1,72 +1,113 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thank You - EventEase</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmed - EventEase</title>
 
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      background: #F5F0E6;
-      font-family: Arial, sans-serif;
-      color: #30291F;
-      text-align: center;
-    }
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-    h1 {
-      font-size: 3rem;
-      color: #967A4D;
-      animation: bounce 1s infinite alternate;
-    }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #F5F0E6;
+            font-family: Arial, sans-serif;
+            color: #30291F;
+            text-align: center;
+        }
 
-    p {
-      font-size: 1.2rem;
-      margin: 10px 0;
-      color: #30291F;
-    }
+        .thankyou-container {
+            width: 100%;
+            max-width: 550px;
+            padding: 45px 30px;
+        }
 
-    .home-btn {
-      background: #CBB58C;
-      color: #30291F;
-      padding: 12px 24px;
-      border: none;
-      border-radius: 10px;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(48, 41, 31, 0.12);
-      transition: all 0.3s ease;
-    }
+        .thankyou-logo {
+            width: 75px;
+            height: 75px;
+            object-fit: contain;
+            margin-bottom: 25px;
+        }
 
-    .home-btn:hover {
-      background: #B69A6B;
-      transform: translateY(-3px);
-    }
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 600;
+            color: #967A4D;
+            margin: 0 0 18px;
+        }
 
-    @keyframes bounce {
-      from { transform: translateY(0); }
-      to { transform: translateY(-12px); }
-    }
-    .thankyou-logo {
-  width: 75px;
-  height: 75px;
-  object-fit: contain;
-  margin-bottom: 10px;
-}
-  </style>
+        p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin: 0 0 30px;
+            color: #51483B;
+        }
+
+        .home-btn {
+            display: inline-block;
+            background: #CBB58C;
+            color: #30291F;
+            padding: 14px 32px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 3px 8px rgba(48, 41, 31, 0.10);
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .home-btn:hover {
+            background: #B69A6B;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 600px) {
+            .thankyou-container {
+                padding: 30px 15px;
+            }
+
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
-  <img src="eventease-logo.png" alt="EventEase Logo" class="thankyou-logo">
-  <h1>🎉 Thank You!</h1>
-  <p>Your payment was successful and your booking is confirmed.</p>
-  <button class="home-btn" onclick="window.location.href='index.html'">Back to Home</button>
+
+    <main class="thankyou-container">
+
+        <img src="eventease-logo.png"
+             alt="EventEase Logo"
+             class="thankyou-logo">
+
+        <h1>Thank You!</h1>
+
+        <p>
+            Your booking has been confirmed successfully.
+            Thank you for choosing EventEase.
+        </p>
+
+        <button class="home-btn"
+                onclick="window.location.href='index.html'">
+            Back to Home
+        </button>
+
+    </main>
+
 </body>
 </html>
