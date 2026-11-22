@@ -164,9 +164,9 @@ NODE_ENV=development
 PORT=3000
 ```
 
-Make sure the database and required tables are created before starting the application.
+Before running the application, set up the database and import the provided database backup.
 
-**Important:** Never upload your `.env` file or database credentials to GitHub.
+**Security Note:** Keep your `.env` file private. Never commit database credentials, passwords, or secret keys to GitHub.
 
 ### 4. Start the Backend
 
