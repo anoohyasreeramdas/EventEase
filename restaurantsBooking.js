@@ -1,4 +1,4 @@
-const API_URL = 'http://127.0.0.1:3000';
+const API_URL = 'https://eventease-backend-0qmn.onrender.com';
 document.addEventListener('DOMContentLoaded', async () => {
 
     // Check whether the user is logged in.

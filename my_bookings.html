@@ -297,7 +297,7 @@
             const bookingsContainer = document.getElementById('bookings-container');
 
             try {
-                const response = await fetch('http://127.0.0.1:3000/my-bookings', {
+                const response = await fetch('https://eventease-backend-0qmn.onrender.com/my-bookings', {
                     credentials: 'include'
                 });
 
@@ -466,7 +466,7 @@
             };
 
             try {
-                const response = await fetch('http://127.0.0.1:3000/cart', {
+                const response = await fetch('https://eventease-backend-0qmn.onrender.com/cart', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
