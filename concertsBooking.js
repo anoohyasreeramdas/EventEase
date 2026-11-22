@@ -1,4 +1,6 @@
+
 const API_URL = 'https://eventease-backend-0qmn.onrender.com';
+
 document.addEventListener('DOMContentLoaded', async () => {
     const concertsContainer = document.getElementById('concerts-container');
 
@@ -41,6 +43,19 @@ document.addEventListener('DOMContentLoaded', async () => {
         return paragraph;
     }
 
+    // Format the concert date for display.
+    function formatDate(date) {
+        if (!date) return 'Date not specified';
+
+        const [year, month, day] = date.split('-').map(Number);
+
+        return new Date(year, month - 1, day).toLocaleDateString('en-GB', {
+            day: '2-digit',
+            month: 'long',
+            year: 'numeric'
+        });
+    }
+
     // Display the available concerts.
     function renderConcerts() {
         concertsContainer.innerHTML = '';
@@ -65,9 +80,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             const title = document.createElement('h2');
             title.textContent = concert.title || '';
 
-            const price = document.createElement('p');
-            price.className = 'price';
-
             const bookButton = document.createElement('button');
             bookButton.className = 'book-btn';
             bookButton.dataset.id = concert.id;
@@ -77,6 +89,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 title,
                 createDetail('Artist', concert.artist),
                 createDetail('Place', concert.place),
+                createDetail('Date', formatDate(concert.date)),
                 createDetail('Time', concert.time),
                 createDetail('Price', `₹${concert.price}`, 'price'),
                 bookButton
@@ -103,6 +116,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             poster: concert.poster,
             price: concert.price,
             artist: concert.artist,
+            date: concert.date,
             time: concert.time,
             place: concert.place
         };
