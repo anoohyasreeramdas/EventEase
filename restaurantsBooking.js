@@ -1,4 +1,5 @@
 const API_URL = 'https://eventease-backend-0qmn.onrender.com';
+
 document.addEventListener('DOMContentLoaded', async () => {
 
     // Check whether the user is logged in.
@@ -37,6 +38,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         const day = String(now.getDate()).padStart(2, '0');
 
         return `${year}-${month}-${day}`;
+    }
+
+    // Format date for display.
+    function formatDate(date) {
+        return new Date(date + 'T00:00:00').toLocaleDateString('en-IN', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        });
     }
 
     // Display restaurants for the selected city.
@@ -99,15 +109,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // Save the selected restaurant reservation.
-    async function handleBooking(restaurant, selectedTime) {
-        if (!restaurant || !selectedTime) return;
+    async function handleBooking(restaurant, selectedTime, selectedDate) {
+        if (!restaurant || !selectedTime || !selectedDate) return;
 
         const bookingDetails = {
             title: restaurant.name,
             poster: restaurant.poster,
             place: restaurant.place,
             time: selectedTime,
-            date: getLocalDate()
+            date: selectedDate
         };
 
         try {
@@ -121,7 +131,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             const result = await response.json();
 
             if (response.ok) {
-                alert(`Table successfully reserved for ${restaurant.name} at ${selectedTime}.`);
+                alert(
+                    `Table successfully reserved for ${restaurant.name} on ${formatDate(selectedDate)} at ${selectedTime}.`
+                );
             } else {
                 alert(`Error: ${result.message || 'Could not complete reservation.'}`);
             }
@@ -145,7 +157,37 @@ document.addEventListener('DOMContentLoaded', async () => {
         modalRestaurantName.textContent = restaurant.name;
         modalTimeSlotsContainer.innerHTML = '';
 
+        // Add date selection.
+        const dateLabel = document.createElement('label');
+        dateLabel.textContent = 'Select Reservation Date';
+        dateLabel.htmlFor = 'reservation-date';
+        dateLabel.style.display = 'block';
+        dateLabel.style.marginBottom = '8px';
+        dateLabel.style.fontWeight = 'bold';
+
+        const dateInput = document.createElement('input');
+        dateInput.type = 'date';
+        dateInput.id = 'reservation-date';
+        dateInput.min = getLocalDate();
+        dateInput.value = getLocalDate();
+        dateInput.style.display = 'block';
+        dateInput.style.width = '100%';
+        dateInput.style.padding = '10px';
+        dateInput.style.marginBottom = '18px';
+        dateInput.style.border = '1px solid #E2D5BD';
+        dateInput.style.borderRadius = '5px';
+        dateInput.style.boxSizing = 'border-box';
+
+        modalTimeSlotsContainer.append(dateLabel, dateInput);
+
+        // Display available time slots.
         if (restaurant.timeSlots && restaurant.timeSlots.length > 0) {
+            const timeHeading = document.createElement('p');
+            timeHeading.textContent = 'Select Reservation Time';
+            timeHeading.style.fontWeight = 'bold';
+
+            modalTimeSlotsContainer.appendChild(timeHeading);
+
             restaurant.timeSlots.forEach(time => {
                 const timeButton = document.createElement('button');
                 timeButton.className = 'time-slot-btn';
@@ -177,10 +219,26 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         if (!button || !modalTimeSlotsContainer.contains(button)) return;
 
+        const selectedDate = document.getElementById('reservation-date').value;
         const selectedTime = button.textContent;
 
+        if (!selectedDate) {
+            alert('Please select a reservation date first.');
+            return;
+        }
+
+        if (selectedDate < getLocalDate()) {
+            alert('Please select today or a future date.');
+            return;
+        }
+
         bookingModal.classList.add('hidden');
-        handleBooking(currentRestaurantForBooking, selectedTime);
+
+        handleBooking(
+            currentRestaurantForBooking,
+            selectedTime,
+            selectedDate
+        );
     });
 
     // Close the booking modal.

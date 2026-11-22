@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -325,7 +326,7 @@
                     return;
                 }
 
-                bookings.forEach((booking, index) => {
+                bookings.forEach((booking) => {
                     let bookingDetails;
 
                     if (typeof booking.booking_details === 'string') {
@@ -373,33 +374,41 @@
                         itemDetails.appendChild(title);
                         itemDetails.appendChild(place);
 
-                        if (item.event_date && item.event_time) {
-                            const dateValue = String(item.event_date).slice(0, 10);
-                            const dateParts = dateValue.split('-');
-                            const showDate = dateParts.length === 3
-                                ? new Date(
-                                    Number(dateParts[0]),
-                                    Number(dateParts[1]) - 1,
-                                    Number(dateParts[2])
-                                ).toLocaleDateString('en-GB', {
-                                    day: '2-digit',
-                                    month: 'short',
-                                    year: 'numeric'
-                                })
-                                : dateValue;
-
+                        // Display event or restaurant reservation date and time.
+                        if (item.event_date || item.event_time) {
                             const showInfo = document.createElement('p');
                             showInfo.className = 'show-info';
-                            showInfo.textContent = 'Date: ' + showDate +
-                                ' | Time: ' + item.event_time;
 
-                            itemDetails.appendChild(showInfo);
+                            let dateText = '';
 
-                        } else if (item.event_time) {
-                            const showInfo = document.createElement('p');
-                            showInfo.className = 'show-info';
-                            showInfo.textContent = 'Time: ' + item.event_time;
+                            if (item.event_date) {
+                                const dateValue = String(item.event_date).slice(0, 10);
+                                const dateParts = dateValue.split('-');
 
+                                dateText = dateParts.length === 3
+                                    ? new Date(
+                                        Number(dateParts[0]),
+                                        Number(dateParts[1]) - 1,
+                                        Number(dateParts[2])
+                                    ).toLocaleDateString('en-GB', {
+                                        day: '2-digit',
+                                        month: 'short',
+                                        year: 'numeric'
+                                    })
+                                    : dateValue;
+                            }
+
+                            const details = [];
+
+                            if (dateText) {
+                                details.push('Date: ' + dateText);
+                            }
+
+                            if (item.event_time) {
+                                details.push('Time: ' + item.event_time);
+                            }
+
+                            showInfo.textContent = details.join(' | ');
                             itemDetails.appendChild(showInfo);
                         }
 
@@ -451,8 +460,7 @@
             }
         });
 
-
-        // Add a previously booked event back to the cart
+        // Add a previously booked event back to the cart.
         async function rebookItem(item) {
             const itemToRebook = {
                 title: item.event_title,
