@@ -1,3 +1,4 @@
+
 const API_URL = 'https://eventease-backend-0qmn.onrender.com';
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -21,6 +22,23 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     const container = document.getElementById('standup-container');
+
+    // Format the show date.
+    function formatDate(date) {
+        if (!date) return 'Date not specified';
+
+        const parsedDate = new Date(date + 'T00:00:00');
+
+        if (isNaN(parsedDate.getTime())) {
+            return 'Date not specified';
+        }
+
+        return parsedDate.toLocaleDateString('en-IN', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        });
+    }
 
     // Display stand-up shows.
     function renderShows() {
@@ -53,6 +71,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             placeLabel.textContent = 'Place: ';
             place.append(placeLabel, document.createTextNode(show.place || ''));
 
+            const date = document.createElement('p');
+            const dateLabel = document.createElement('strong');
+            dateLabel.textContent = 'Date: ';
+            date.append(dateLabel, document.createTextNode(formatDate(show.date)));
+
             const time = document.createElement('p');
             const timeLabel = document.createElement('strong');
             timeLabel.textContent = 'Time: ';
@@ -67,7 +90,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             bookButton.dataset.id = show.id;
             bookButton.textContent = 'Book Ticket';
 
-            details.append(title, place, time, price, bookButton);
+            details.append(title, place, date, time, price, bookButton);
             card.append(poster, details);
 
             container.appendChild(card);
@@ -87,6 +110,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             poster: show.poster,
             price: show.price,
             place: show.place,
+            date: show.date || null,
             time: show.time
         };
 
